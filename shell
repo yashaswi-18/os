@@ -1,0 +1,701 @@
+-> lanaguage to communicate with kernel directly.  --> shell
+
+-> shell is interpereted languages.
+
+-> shell has .sh extension
+
+-> (terminal) shell will be activatate using terminal 
+
+-> shell supports CLI ( command line interface) and batch processing
+
+-> shell is used for automation
+
+r read  w write e/x execute
+
+nano -> is the editor , fastest 
+
+
+chmod XXX -> X user X group X public(Global)
+
+0 - no permission
+1 execute
+2 write
+3(2+1) w+e
+4 read
+5(4+1) r+e
+6(4+2) r+w
+7(4+2+1) all
+ 
+-> The first line identifies the file as a bash input script #!/bin/bash
+
+-> comments begin with #
+-----------------------------------
+
+-> shell casting hai aur data static hota hai --> it takes boolean , decimal and string only not float
+
+-> for printing means access the variable value use $variablename
+
+-> set a variable --> Variablename = value(no spaces , no $ before variablename)
+
+------------------------------------
+for read and write
+
+echo "message"
+read variable
+echo "message $variable"
+
+----------------------------------------------------------------
+
+-p -->prompt
+----------------------------------------------------------
+
+
+Commands
+
+>ls --> list of file  -->color combination is type of file
+
+>ls -l --> transforms your plain file list into a detailed directory listing, showing file permissions, number of links, owner, group, size, and time of last modification.
+            1.user    
+            2.Group
+            3.Global
+
+
+>ls --help  --> helps to use about ls command / you can change ls with anything you want to know commands
+
+>history 10  -->LIFO manner work gave last 10 commands
+
+>history
+
+> clear  -- use to clear the terminal screen
+
+>nano ___.sh
+
+>chmod 777 ___.sh   -->chmod XXX -> X user X group X public(Global)
+
+>___.sh
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Starting with concept of shell script 
+
+-----------------------------------------------------------------------------------
+-> nano myycp.sh
+
+
+-type on shell some commands
+
+#!/bin/bash
+echo " hi I am shell "
+echo "who are you ?"
+read name
+echo " ohh hi $name"
+ls
+read next
+clear
+ls -l
+read next 
+clear
+ls --help
+echo " power of shell script"
+
+-------------------------------------------
+>nano readvariation.sh   --> create file using nano.filename.sh
+
+->chmod 777 readvariation.sh
+
+->./readvariation.sh   -->for run
+
+
+#!/bin/bash
+
+#read -p "this is message to display on screen " data
+#read data
+read -p "Who are you:" name
+echo "entered data is : $name"
+read -p "hobbies " h1 h2 h3
+echo "Hobbies $h1 $h2 $h3"
+
+----------------------------------------------------------------------
+
+Shell use [] brackets
+end mein ayega fi
+
+cat ./add.sh --> showing shell program what you write in shell
+
+#!/bin/bash
+read -p "Enter 1st number:" no1
+read -p "Enter 2nd number:" no2
+echo "Addition is $((no1+no2))"
+#echo "Addition is $(($no1+$no2))"
+
+
+> nano add.sh
+> chmod 777 add.sh
+> ./add.sh
+Enter 1st number:12
+Enter 2nd number:12
+Addition is 24
+
+
+Mcq point of view
+
+-eq  equal to 
+-ne
+-gt
+-ge
+
+
+
+-a --> AND
+-o --> OR
+!  --> not equal to
+
+
+Positional parameters
+
+$0 --> reference to the name of script
+$# -->holds the value of the number of positional operators (count)
+$8 --> List all parameters
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+
+echo "Total number of parameters :$#"
+echo "File name is:$0"
+echo "First parameter is $1" 
+echo "Second parameter is $2:" 
+echo "All parameters is :$*"
+
+>./cli.sh one two three four
+
+---------------------------------------------------
+
+//addition using cli(addcli.sh   )
+
+  GNU nano 4.8                                                                                                                                               
+#!/bin/bash
+
+echo "total number of parameters given $#"
+echo "$1 + $2 = $(($1+$2))"
+
+
+> nano addcli.sh
+> chmod 777 addcli.sh
+>./addcli.sh 12 12
+total number of parameters given 2
+12 + 12 = 24
+
+-----------------------------------------------------
+
+// positive or negative number check(pon.sh)
+
+#!/bin/bash
+ 
+read -p "Enter a number : " no
+if [ $no -ge 0 ]
+then
+echo "$no is +ve"
+else
+echo "$no is -ve"
+fi
+
+> chmod 777 pon.sh
+>./pon.sh
+
+-------------------------------------------------------
+
+positive negative and zero
+
+#!/bin/bash
+
+read -p "Enter a number:" no
+
+if [ $no -lt 0 ]
+
+then 
+
+echo "Sno is  -ve"
+
+elif [ $no -gt 0 ]
+
+then 
+
+echo "$no is +ve"
+
+else
+
+echo "$no is equal to zero"
+fi 
+
+
+----------------------------------------
+
+for loop is print the 1 to 10 numbers
+
+#!/bin/bash
+
+for i in {1..10}
+do
+echo $i
+done
+
+
+---------------------------------
+
+#!/bin/bash
+
+for i in {1..10..2}  //start 1 end 10 step 2
+do
+echo $i
+done
+
+output
+>./for_ex.sh
+1
+3
+5
+7
+9
+
+--------------------------------
+
+#!/bin/bash
+
+for i in {1..10..2}
+do
+echo $i
+done
+
+for word in my name is yashaswi krishna patil
+do 
+echo $word
+done
+
+
+output
+
+>./for_ex.sh
+1
+3
+5
+7
+9
+my
+name
+is
+yashaswi
+krishna
+patil
+
+---------------------------------------
+while loop program 
+
+for iterate krne ke kam ata hai
+while loop generate krne ke liy use hota hai
+
+> ls *.sh --> showing the list
+
+
+ > nano while_ex.sh
+ > chmod 777 while_ex.sh
+ > cat ./while_ex.sh
+
+#!/bin/bash
+
+read -p "Start: " s
+read -p "End: " e
+
+if [ $s -lt $e ]
+
+then
+   
+       while [ $s -le $e ] //space asch dyayche nhitr error yetat
+       do
+                   echo $s
+                   s=$((s+1))
+       done
+else
+       while [ $s -ge $e ]
+       do
+                  echo $s
+                  s = $((s-1))
+       done
+fi
+
+output
+
+> ./while_ex.sh
+Start: 4
+End: 10
+4
+5
+6
+7
+8
+9
+10
+
+----------------------------------------
+
+the until command
+
+ - until works like the while command , except it excute the loop if the exit status is nonzero
+ - till condition is execute when true it will stop
+                                  false it will continue
+
+
+----------------------------------------
+
+
+switch case program 
+
+Case Syntax
+
+
+  case variable
+      value1 )
+         commands
+          ;;
+   *) #default
+          commands
+            ;;
+   esac
+
+ - String or natural number you can use as case numbering 
+
+
+
+---------------------------------------------------
+
+String
+
+-z --> length of string is zero
+-n --> length of string is nonzero
+-l --> length of String
+
+
+// program how many times aa , aaa and others alphates are come
+
+#!/bin/bash
+
+read -p "Enter line: " line
+
+a2=0
+a3=0
+b2=0
+
+for word in $line
+ do  
+      case $word in
+          "aa") a2=$((a2+1))
+                ;;
+          "aaa")  a3=$((a3+1))
+               ;;
+         *)
+                 b2=$((b2+1))
+                ;;
+esac
+done
+echo "$a2 $a3 $b2"
+
+Output
+
+> ./countwords.sh
+Enter line: aa aaa ab abb bbc
+1(aa) 1(aaa) 3(ab,abb,bbc)
+
+
+or
+
+
+#!/bin/bash
+
+read -p "Enter line: " line
+
+a2=0
+a3=0
+b2=0
+
+for word in $line
+ do 
+      echo "word has $word" 
+      case $word in
+          "aa") a2=$((a2+1))
+                ;;
+          "aaa")  a3=$((a3+1))
+               ;;
+         *)
+                 b2=$((b2+1))
+                ;;
+esac
+done
+echo "$a2 $a3 $b2"
+
+
+output
+
+>./countwords.sh
+Enter line: aa aa aaa aaa b bbb aaab 
+word has aa
+word has aa
+word has aaa
+word has aaa
+word has b
+word has bbb
+word has aaab
+2 2 3
+
+---------------------------------------------
+
+// program count one charcter how many times in your name
+
+#!/bin/bash
+
+read -p "Enter a line:" line
+read -p "word to search:" word
+count=0
+for i in $line
+do
+if [ $word == $i ]
+then
+count=$((count+1))
+fi
+done
+
+echo "Total count : $count" 
+
+
+output
+>./onewordcount.sh
+Enter a line:this is is
+word to search:is
+Total count : 2
+
+
+Commands
+- When you use cat commands then when you want to finish the file end of file then use ctrl+d
+
+cat : to see content of file on screen without editor
+ 
+> means it can be create new file
+
+>> means existing file mein kuch add krna ho to
+
+
+-> cat >mywish.txt
+new lines new wishes going on
+
+-> cat > mywish.ttx
+cat mywish.txt
+new lines new wishes going on
+
+-> cat >> mywish.txt
+this is also my wish
+
+-> cat mywish.txt
+new lines new wishes going on
+this is also my wish
+
+cat >> mywish.txt <<EOF
+> this is last
+> also this
+> End
+> bash: warning: here-document at line 36 delimited by end-of-file (wanted `EOF')
+pritish@pritish-Inspiron-15-3567:~$ cat mywish.txt
+new lines new wishes going on
+this is also my wish
+this is last
+also this
+End
+
+
+// for adding two files
+
+How to activate super user?
+
+
+cat --> print first lines
+
+> sudo -i
+root@pritish-Inspiron-15-3567:~# cat >file1.txt
+this is file one
+
+root@pritish-Inspiron-15-3567:~# cat > file2.txt
+this is file two
+
+root@pritish-Inspiron-15-3567:~# cat file1.txt file2.txt >>file3.txt
+root@pritish-Inspiron-15-3567:~# 
+
+root@pritish-Inspiron-15-3567:~# cat file3.txt
+this is file one
+this is file two
+root@pritish-Inspiron-15-3567:~# 
+
+
+
+tail --> print last lines
+
+> tail -1  file3.txt
+this is file two
+
+head
+
+- default value of head is 10
+head -n file3.txt
+
+
+- priority level 20 rehti hai by default
+
+- command to see system utilization/resources is --> htop
+ctrl+z  -->end 
+
+------------- grep -----------------
+
+
+- used to search data in a file --> grep
+ 
+-> cat > myfile.txt
+this is an example 
+coding shell script
+done by amar sir
+coding is good work
+
+root@pritish-Inspiron-15-3567:~# grep "code" myfile.txt
+//not found that code word in file
+
+root@pritish-Inspiron-15-3567:~# grep "coding" myfile.txt
+coding shell script
+coding is good work
+root@pritish-Inspiron-15-3567:~# 
+
+
+- to remove case sensitivity in grep command use -i
+
+-find number of lines in file use -c
+
+- jitna uska a mila utna usne print kiya "a" -c
+
+- search given word present in all file showing and delete it using grep command -> *
+
+- search vowels using the grep commands -> grep -o "[aeiou]" myfile.txt
+
+
+cat for_vowels.sh
+#!/bin/bash
+
+read -p "Enter a string: " input_string
+
+vowel_count=0
+
+for ((i=0; i<${#input_string}; i++)); do
+    char="${input_string:i:1}"
+    if [[ "$char" =~ [aeiouAEIOU] ]]; then
+        ((vowel_count++))
+    fi
+done
+
+echo "Number of vowels in the string: $vowel_count"
+
+
+
+
+- how you remove directory with content -> rm -rf dir_with_content_to_remove/
+- use of mv command to move 
+   - you use mv command to move or rename files and directories through your file system
+
+>mv source_file destination_folder/
+>mv add.sh add_new.sh
+
+mkdir --create directory
+mkdir -p -->create subdirectories ( -p parent )
+
+
+Gove me 2 commands to give me more about commands 
+> command --help
+> man ls  ( to exit use q)   
+eg . >man mkdir
+
+ps -> which command shows active processor id
+
+kill -> 1.using process id
+        2.using name
+
+How to active sueruser
+1.sudo -i
+2.sudo -s
+
+ping -> used to test network connectivity
+
+127.0.0.0  -> localhost
+127.0.0.1 -> localhost
+
+
+passwd -> change the password doesent display the password
+
+which command -> outputs the full path of shell commands
+
+whoami command -> means display the username 
+
+whatis command -> prints single line descriptiom of any other command 
+
+
+wc command ->word count it suggest number of words in your file
+
+-> cat myfile.txt
+this is an example 
+coding shell script
+done by amar sir
+coding is good work
+
+-> wc myfile.txt
+
+ 4 15 77 myfile.txt
+
+
+tr -> searching data hai ( current isme data search krta hai)
+
+
+uname --> unix name prints the operative system
+
+neofetch command --> is cli tool show about os
+
+find command --> searches for files in a directory hireachy based on regrex expression
+
+difference between grep (searches content within the file) and find(Searches for the file)
+
+difference between cat(cretae file and fill the content in it ) and touch(it only create a single/multiple files not capable to writing data in file)
+
+echo used to insert text into file using existing file
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// my own way -> source myycp.sh  ----  > this is for run 
+ctrl + O for saving the file file name to write
+
+ctrl + x to exit from shell
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+C++                                        
+object oriented programming with java      
+Algorithms and data syructure with java    
+web programming technologies               
+Database technologies                      
+Microsoft .net technologies                
+Operating System                           
+Software development methodologies         
+web based java programming                 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
